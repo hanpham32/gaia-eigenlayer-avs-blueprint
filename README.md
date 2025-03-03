@@ -2,20 +2,18 @@
 
 ## 📚 Overview
 
-This Tangle Blueprint provides a simple Hello World job.
-Blueprints are specifications for <abbr title="Actively Validated Services">AVS</abbr>s on the Tangle Network. An AVS is
-an off-chain service that runs arbitrary computations for a user-specified period of time.
+This EigenLayer Gaia Node Template provides a foundation for building and managing Gaia Node services on the EigenLayer testnet. It offers a complete implementation that developers can use as a starting point for their own EigenLayer AVS (Actively Validated Services) projects.
 
-Blueprints provide a useful abstraction, allowing developers to create reusable service infrastructures as if they were
-smart contracts. This enables developers to monetize their work and align long-term incentives with the success of their
-creations, benefiting proportionally to their Blueprint's usage.
+Gaia Nodes are part of the blockchain infrastructure that enables developers to deploy and manage decentralized applications. This template implements core functionality for starting, monitoring, and managing these nodes through smart contracts integrated with EigenLayer's restaking infrastructure.
+
+The template includes contracts that interact with EigenLayer's middleware, allowing operators to register, operate nodes, and receive rewards for their services. This creates a foundation that simplifies the development process for teams building on EigenLayer.
 
 For more details, please refer to the [project documentation](https://docs.tangle.tools/developers/blueprints/introduction).
 
 ## 🚀 Features
 
-- Custom greeting messages
-- Default "Hello World!" messages
+- EigenLayer testnet setup
+- Gaia Node Manager template
 - ...
 
 ## 📋 Prerequisites
