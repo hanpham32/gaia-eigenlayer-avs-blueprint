@@ -1,0 +1,3 @@
+[submodule "dependencies/eigenlayer-middleware"]
+	path = dependencies/eigenlayer-middleware
+	url = https://github.com/Layr-Labs/eigenlayer-middleware
