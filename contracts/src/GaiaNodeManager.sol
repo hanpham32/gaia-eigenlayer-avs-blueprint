@@ -5,6 +5,7 @@ import "@openzeppelin-upgrades/contracts/proxy/utils/Initializable.sol";
 import "@openzeppelin-upgrades/contracts/access/OwnableUpgradeable.sol";
 import "eigenlayer-contracts/src/contracts/permissions/Pausable.sol";
 import "eigenlayer-middleware/src/interfaces/IServiceManager.sol";
+import "eigenlayer-middleware/src/interfaces/IRegistryCoordinator.sol";
 import {RegistryCoordinator} from "eigenlayer-middleware/src/RegistryCoordinator.sol";
 import {OperatorStateRetriever} from "eigenlayer-middleware/src/OperatorStateRetriever.sol";
 import "eigenlayer-middleware/src/libraries/BN254.sol";
@@ -14,13 +15,15 @@ contract GaiaNodeManager is
     Initializable,
     OwnableUpgradeable,
     Pausable,
-    IGaiaNodeManager,
+    IGaiaNodeManager
 {
     /* CONSTANT */
     uint32 public immutable TASK_RESPONSE_WINDOW_BLOCK;
     uint32 public constant TASK_CHALLENGE_WINDOW_BLOCK = 100;
 
     /* STORAGE */
+    IRegistryCoordinator public registryCoordinator;
+    uint32 public latestTaskNum;
     mapping(uint32 => GaiaNodeConfig) private nodeConfigs;
     mapping(address => uint32[]) private operatorTasks;
 
@@ -30,10 +33,19 @@ contract GaiaNodeManager is
         _;
     }
 
+    modifier validTaskId(uint32 taskId) {
+        require(nodeConfigs[taskId].operator != address(0), "Task ID does not exist");
+        _;
+    }
+
     constructor(
         IRegistryCoordinator _registryCoordinator,
+        uint32 _taskResponseWindowBlock
     ) {
+      registryCoordinator = _registryCoordinator;
+      TASK_RESPONSE_WINDOW_BLOCK = _taskResponseWindowBlock;
     }
+
     /* FUNCTIONS */
     // NOTE: this function starts a new Gaia node
     function startGaiaNode(
@@ -62,6 +74,8 @@ contract GaiaNodeManager is
             msg.sender,
             block.timestamp
         );
+
+        return taskId;
     }
 
     function stopGaiaNode(
