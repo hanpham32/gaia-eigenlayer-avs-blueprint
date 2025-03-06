@@ -24,9 +24,6 @@ Before you can run this project, you will need to have the following software in
 - [Forge](https://getfoundry.sh)
 - [Tangle](https://docs.tangle.tools/developers/cli/installation)
 
-You will also need to install [cargo-tangle](https://crates.io/crates/cargo-tangle), our CLI tool for creating and
-deploying Tangle Blueprints:
-
 To install the Tangle CLI, run the following command:
 
 > Supported on Linux, MacOS, and Windows (WSL2)
